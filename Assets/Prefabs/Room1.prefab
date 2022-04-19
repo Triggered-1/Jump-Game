@@ -186,10 +186,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -8, y: 14}
-      - {x: -8, y: -10}
-      - {x: 7, y: -10}
-      - {x: 7, y: 14}
+    - - {x: -8, y: 20}
+      - {x: -8, y: -20}
+      - {x: 7, y: -20}
+      - {x: 7, y: 20}
 --- !u!1 &3206940229124362397
 GameObject:
   m_ObjectHideFlags: 0

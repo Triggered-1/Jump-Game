@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    [SerializeField] private Vector2 bouncFactor;
     public static PlayerControl instance;
     public float power = 10f;
     public float maxDrag = 5f;
@@ -30,7 +31,7 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount > 0 &&!isMoving)
+        if (Input.touchCount > 0 && !isMoving)
         {
             touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began)
@@ -73,7 +74,28 @@ public class PlayerControl : MonoBehaviour
         Vector3 force = dragStartPos - dragReleasePos;
         Vector3 clampedForce = Vector3.ClampMagnitude(force, maxDrag) * power;
         rb.AddForce(clampedForce, ForceMode2D.Impulse);
-        
+
         OnMove?.Invoke();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.contactCount);
+        foreach (var col in collision.contacts)
+        {
+            if (col.normal == Vector2.up)
+            {
+                rb.velocity = Vector3.zero;
+                break;
+            }
+            else if (col.normal == Vector2.down)
+            {
+                continue;
+            }
+            else
+            {
+                rb.AddForce(new Vector2(-rb.velocity.x * bouncFactor.x, rb.velocity.y * bouncFactor.y));
+            }
+        }
     }
 }
