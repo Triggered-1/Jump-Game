@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
     private PlayerData playerData;
     private int coins;
     public string path;
+    public PlayerStatsSO playerStats;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,11 @@ public class PlayerStats : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void AddCoins(int amount)
+    {
+        playerStats.Coin += amount;
     }
 
     public void RecieveCoins()

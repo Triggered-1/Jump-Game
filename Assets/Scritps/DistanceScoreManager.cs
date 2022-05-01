@@ -8,6 +8,7 @@ public class DistanceScoreManager : MonoBehaviour
 {
     public GameObject startPos;
     [SerializeField] private TextMeshProUGUI currentScore;
+    [SerializeField] private PlayerStatsSO playerStat;
 
     private float distance;
     private float highestDistance;
@@ -24,7 +25,11 @@ public class DistanceScoreManager : MonoBehaviour
         if (highestDistance < distance)
         {
             highestDistance = distance;
-            currentScore.text = highestDistance.ToString("F1") + " M"; 
+            currentScore.text = highestDistance.ToString("F1") + " M";
+            if (playerStat.HighScore < highestDistance)
+            {
+                playerStat.HighScore = highestDistance;
+            }
         }
     }
 }

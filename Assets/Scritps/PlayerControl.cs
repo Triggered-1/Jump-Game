@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     [SerializeField] private Vector2 bouncFactor;
+    [SerializeField] private LayerMask wallLayer;
     public static PlayerControl instance;
     public float power = 10f;
     public float maxDrag = 5f;
@@ -47,9 +48,8 @@ public class PlayerControl : MonoBehaviour
                 DragRealease();
             }
         }
-
-
     }
+    
     private void DragStart()
     {
         dragStartPos = Camera.main.ScreenToWorldPoint(touch.position);
@@ -80,22 +80,32 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.contactCount);
+        //Debug.Log(collision.contactCount);
         foreach (var col in collision.contacts)
         {
+            Debug.Log(col.normal);
             if (col.normal == Vector2.up)
             {
+                Debug.Log("Ground");
                 rb.velocity = Vector3.zero;
                 break;
             }
             else if (col.normal == Vector2.down)
             {
+                Debug.Log("ceiling");
+
                 continue;
             }
             else
             {
-                rb.AddForce(new Vector2(-rb.velocity.x * bouncFactor.x, rb.velocity.y * bouncFactor.y));
+                Debug.Log("else");
+
+                //rb.AddForce(new Vector2(-rb.velocity.x * bouncFactor.x, rb.velocity.y * bouncFactor.y));
+                //rb.velocity = new Vector2(-rb.velocity.x * bouncFactor.x, rb.velocity.y * bouncFactor.y);
             }
+
+
+
         }
     }
 }
