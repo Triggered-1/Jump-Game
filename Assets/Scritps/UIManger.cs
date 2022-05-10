@@ -15,7 +15,7 @@ public class UIManger : MonoBehaviour
         playerStats.CoinChange += ChangeCoinUI;
         playerStats.HighscoreChange += ChangeHighscoreUI;
         ChangeHighscoreUI();
-        ChangeCoinUI();
+        ChangeCoinUI(); 
     }
 
     // Update is called once per frame
@@ -32,5 +32,10 @@ public class UIManger : MonoBehaviour
     private void ChangeHighscoreUI()
     {
         highscoreTxt.text = playerStats.HighScore.ToString("F1") + " M";
+    }
+
+    public void PauseButton()
+    {
+
     }
 }
